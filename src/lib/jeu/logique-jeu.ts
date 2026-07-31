@@ -1,14 +1,20 @@
 import { PartieEnCours, Image, Reponse, ResultatPartie, ReponseUtilisateur } from '@/types'
 
 // Fonction pour créer une nouvelle partie
-export function creerNouvellePartie(mode: 'realistic' | 'painting', images: Image[], dateJeu: string): PartieEnCours {
+export function creerNouvellePartie(
+  mode: 'realistic' | 'painting',
+  images: Image[],
+  dateJeu: string,
+  estPartiePartagee = false
+): PartieEnCours {
   return {
     id: `partie_${Date.now()}`,
     mode,
     images,
     image_actuelle: 0,
     reponses: [],
-    date_jeu: dateJeu
+    date_jeu: dateJeu,
+    estPartiePartagee
   }
 }
 

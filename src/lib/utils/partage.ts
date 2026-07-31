@@ -1,4 +1,5 @@
 import { DonneesPartage, ResultatPartie } from '@/types'
+import { encoderPartie } from './lien-partie'
 
 // Phrases de défi variées selon le score, pour donner envie de partager
 const DEFIS_PAR_SCORE: Record<number, string[]> = {
@@ -47,17 +48,26 @@ export function genererTextePartage(donnees: DonneesPartage): string {
 // Fonction pour générer le texte de partage avec lien
 export function genererTextePartageAvecLien(donnees: DonneesPartage): string {
   const texteBase = genererTextePartage(donnees)
-  const lien = obtenirLienJeu()
+  const lien = obtenirLienPartie(donnees)
 
   return `${texteBase}\n\n${lien}`
 }
 
-// Fonction pour obtenir le lien du jeu
+// Fonction pour obtenir le lien du jeu (accueil generale, sans partie precise)
 export function obtenirLienJeu(): string {
   if (typeof window !== 'undefined') {
     return window.location.origin
   }
   return 'https://ai-or-not.nathan-knaebel.com'
+}
+
+// Fonction pour obtenir un lien pointant vers la partie exacte qui vient
+// d'etre jouee (memes 5 images, quel que soit le mode ou la date a laquelle
+// le destinataire clique dessus)
+export function obtenirLienPartie(donnees: DonneesPartage): string {
+  const base = obtenirLienJeu()
+  const id = encoderPartie(donnees.mode, donnees.images)
+  return `${base}?partie=${id}`
 }
 
 // Fonction pour copier le texte dans le presse-papiers
@@ -93,11 +103,10 @@ export async function copierDansPressePapiers(texte: string): Promise<boolean> {
 export async function partagerViaWebShare(donnees: DonneesPartage): Promise<boolean> {
   try {
     if (navigator.share) {
-      const texte = genererTextePartageAvecLien(donnees)
       await navigator.share({
         title: 'AI or Not',
-        text: texte,
-        url: obtenirLienJeu(),
+        text: genererTextePartage(donnees),
+        url: obtenirLienPartie(donnees),
       })
       return true
     }

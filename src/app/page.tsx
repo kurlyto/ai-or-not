@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Header } from '@/components/header/header'
 import { EcranDemarrage } from '@/components/jeu/ecran-demarrage'
 import { ZoneImage } from '@/components/jeu/zone-image'
@@ -19,6 +19,7 @@ import {
 } from '@/lib/jeu/logique-jeu'
 import { sauvegarderDernierePartie, mettreAJourStatistiques } from '@/lib/utils/localStorage'
 import { obtenirDateJeu, marquerModeJoue } from '@/lib/jeu/gestion-date'
+import { decoderPartie } from '@/lib/utils/lien-partie'
 
 type EtatJeu = 'demarrage' | 'en_cours' | 'resultats'
 
@@ -35,6 +36,25 @@ export default function HomePage() {
   const [dateSelectionnee, setDateSelectionnee] = useState<string | null>(null)
   const [feedback, setFeedback] = useState<FeedbackReponse | null>(null)
   const [popoverPartageVisible, setPopoverPartageVisible] = useState(false)
+
+  // Si l'URL contient ?partie=..., on charge exactement cette partie (memes
+  // 5 images que celle partagee), plutot que de generer la partie du jour.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const idPartie = params.get('partie')
+    if (!idPartie) return
+
+    const decodee = decoderPartie(idPartie)
+    if (!decodee) return
+
+    const nouvellePartie = creerNouvellePartie(decodee.mode, decodee.images, obtenirDateJeu(), true)
+    setPartie(nouvellePartie)
+    setEtatJeu('en_cours')
+
+    // Nettoie l'URL pour eviter de recharger la meme partie sur un refresh
+    // ou de la re-partager par erreur avec le lien de la page courante.
+    window.history.replaceState({}, '', window.location.pathname)
+  }, [])
 
   const demarrerJeu = async (mode: ModeJeu) => {
     setIsLoading(true)
@@ -82,24 +102,34 @@ export default function HomePage() {
     setIsLoading(true)
 
     try {
-      const res = await fetch('/api/verifier-reponse', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          image_id: imageActuelle.id,
-          reponse,
-          mode: partie.mode,
-          date_jeu: partie.date_jeu,
-        }),
-      })
-      const data = await res.json()
+      let estCorrecte: boolean
+      let reponseCorrecte: 'ai' | 'not_ai'
 
-      if (!data.success) {
-        throw new Error(data.error || 'Erreur lors de la vérification')
+      if (partie.estPartiePartagee) {
+        // Partie chargee depuis un lien de partage : les images sont deja
+        // connues cote client, pas besoin d'aller demander au serveur.
+        estCorrecte = (imageActuelle.est_ia && reponse === 'ai') || (!imageActuelle.est_ia && reponse === 'not_ai')
+        reponseCorrecte = imageActuelle.est_ia ? 'ai' : 'not_ai'
+      } else {
+        const res = await fetch('/api/verifier-reponse', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            image_id: imageActuelle.id,
+            reponse,
+            mode: partie.mode,
+            date_jeu: partie.date_jeu,
+          }),
+        })
+        const data = await res.json()
+
+        if (!data.success) {
+          throw new Error(data.error || 'Erreur lors de la vérification')
+        }
+
+        estCorrecte = data.data.est_correcte
+        reponseCorrecte = data.data.reponse_correcte
       }
-
-      const estCorrecte: boolean = data.data.est_correcte
-      const reponseCorrecte: 'ai' | 'not_ai' = data.data.reponse_correcte
 
       // Affiche le feedback (bonne/mauvaise reponse) avant de passer a la suite
       setFeedback({ estCorrecte, reponseCorrecte })
@@ -114,7 +144,7 @@ export default function HomePage() {
           const resultat = calculerResultat(partieMiseAJour)
           sauvegarderDernierePartie(resultat)
           mettreAJourStatistiques(resultat)
-          if (!dateSelectionnee) {
+          if (!dateSelectionnee && !partie.estPartiePartagee) {
             marquerModeJoue(partie.mode)
           }
           setEtatJeu('resultats')
@@ -206,6 +236,7 @@ export default function HomePage() {
                   total: obtenirResultatActuel()!.total,
                   mode: partie.mode,
                   date_jeu: partie.date_jeu,
+                  images: partie.images,
                 }}
                 onFermer={() => setPopoverPartageVisible(false)}
               />

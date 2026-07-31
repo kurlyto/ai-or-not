@@ -32,6 +32,7 @@ export interface PartieEnCours {
   image_actuelle: number // Index de l'image actuelle (0 à 4)
   reponses: Reponse[]
   date_jeu: string // Date au format YYYY-MM-DD
+  estPartiePartagee?: boolean // true si chargee depuis un lien de partage (?partie=)
 }
 
 export interface ResultatPartie {
@@ -49,6 +50,7 @@ export interface DonneesPartage {
   total: number
   mode: ModeJeu
   date_jeu: string
+  images: Image[]
 }
 
 export interface StatistiquesJeu {
