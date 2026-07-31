@@ -36,14 +36,12 @@ function choisirDefi(score: number): string {
 
 // Fonction pour générer le texte de partage
 export function genererTextePartage(donnees: DonneesPartage): string {
-  const { score, total, mode } = donnees
+  const { score, mode } = donnees
   const emoji = mode === 'painting' ? '🎨' : '📸'
-  const modeTexte = mode === 'painting' ? 'Peinture' : 'Réaliste'
 
-  const resultat = `${emoji} AI or Not (${modeTexte}) : ${score}/${total}`
   const defi = choisirDefi(score)
 
-  return `${resultat}\n\n${defi}`
+  return `${emoji} ${defi}`
 }
 
 // Fonction pour générer le texte de partage avec lien

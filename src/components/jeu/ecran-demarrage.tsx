@@ -98,7 +98,7 @@ export function EcranDemarrage({ onDemarrerJeu, isLoading = false, dateSelection
         })}
       </div>
 
-      <div className="animate-fade-in-up space-y-1 text-center lg:space-y-2" style={{ animationDelay: '140ms' }}>
+      <div className="animate-fade-in-up -mt-3 space-y-1 text-center lg:-mt-8 lg:space-y-2" style={{ animationDelay: '140ms' }}>
         <p className="text-xs text-gray-500 lg:text-lg">
           5 images par partie · nouvelle partie chaque jour à minuit
         </p>
