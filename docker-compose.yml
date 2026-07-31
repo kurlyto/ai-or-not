@@ -1,0 +1,16 @@
+services:
+  ai-or-not:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ai-or-not
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3104:3000"
+    mem_limit: 512m
+    cpus: 1.0
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
