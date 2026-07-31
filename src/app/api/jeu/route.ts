@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ success: false, error: 'Date invalide' }, { status: 400 })
     }
 
-    const images = genererPartieDuJour(dateJeu, mode)
+    const images = await genererPartieDuJour(dateJeu, mode)
 
     return NextResponse.json({
       success: true,

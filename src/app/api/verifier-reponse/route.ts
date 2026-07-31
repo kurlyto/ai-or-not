@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { trouverImageParId } from '@/lib/jeu/selection-images'
 import { obtenirDateJeu } from '@/lib/jeu/gestion-date'
+import { declencherTelechargement } from '@/lib/unsplash/client'
 import { ModeJeu } from '@/types'
 
 export async function POST(request: NextRequest) {
@@ -21,13 +22,20 @@ export async function POST(request: NextRequest) {
     }
 
     const dateJeu: string = date_jeu || obtenirDateJeu()
-    const image = trouverImageParId(dateJeu, mode as ModeJeu, image_id)
+    const image = await trouverImageParId(dateJeu, mode as ModeJeu, image_id)
 
     if (!image) {
       return NextResponse.json({ success: false, error: 'Image introuvable pour cette partie' }, { status: 404 })
     }
 
     const estCorrecte = (image.est_ia && reponse === 'ai') || (!image.est_ia && reponse === 'not_ai')
+
+    // Guideline Unsplash : declencher un "download" a chaque fois qu'une
+    // photo est reellement montree/utilisee, pas au moment ou elle est
+    // recuperee/cachee cote serveur.
+    if (image.attributionUnsplash) {
+      void declencherTelechargement(image.attributionUnsplash.downloadLocation)
+    }
 
     return NextResponse.json({
       success: true,

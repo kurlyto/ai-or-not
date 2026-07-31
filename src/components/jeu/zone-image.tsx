@@ -60,7 +60,7 @@ export function ZoneImage({ image, feedback }: ZoneImageProps) {
 
       {feedback && (
         <div
-          className={`absolute inset-0 flex items-end justify-center pb-4 animate-fade-in ${
+          className={`absolute inset-0 flex flex-col items-center justify-end gap-2 pb-4 animate-fade-in ${
             feedback.estCorrecte ? 'bg-accent-green/10' : 'bg-accent-red/10'
           }`}
         >
@@ -74,6 +74,29 @@ export function ZoneImage({ image, feedback }: ZoneImageProps) {
               — c&apos;etait {feedback.reponseCorrecte === 'ai' ? 'une image IA' : 'une image reelle'}
             </span>
           </div>
+
+          {image.attributionUnsplash && (
+            <p className="animate-fade-in rounded-full bg-black/50 px-3 py-1 text-xs text-gray-200">
+              Photo de{' '}
+              <a
+                href={image.attributionUnsplash.photographeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium underline-offset-2 hover:underline"
+              >
+                {image.attributionUnsplash.photographeNom}
+              </a>{' '}
+              sur{' '}
+              <a
+                href={image.attributionUnsplash.photoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium underline-offset-2 hover:underline"
+              >
+                Unsplash
+              </a>
+            </p>
+          )}
         </div>
       )}
     </div>

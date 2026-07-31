@@ -29,3 +29,6 @@ next-env.d.ts
 
 # raw dataset (not shipped, only curated public/images are committed)
 dataset/
+
+# cache serveur (genere au runtime, jamais committe)
+data/

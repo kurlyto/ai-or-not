@@ -1,5 +1,6 @@
 import { Image, ModeJeu } from '@/types'
 import { lireManifest } from '@/lib/data/manifest'
+import { obtenirPhotosDuJour } from '@/lib/unsplash/cache-quotidien'
 
 // PRNG deterministe (mulberry32) : meme seed => meme suite de nombres,
 // necessaire pour que tous les joueurs aient la meme partie un jour donne.
@@ -37,42 +38,58 @@ function choisirNAvecSeed<T>(items: T[], n: number, seed: number): T[] {
   return melangerAvecSeed(items, seed).slice(0, n)
 }
 
-// Genere les 5 images d'une partie de facon deterministe pour (date, mode).
-// Repartition variable (2 ou 3 images IA sur 5) selon le seed, pour que le
-// nombre d'images IA ne soit pas devinable a l'avance.
-export function genererPartieDuJour(date: string, mode: ModeJeu): Image[] {
-  const manifest = lireManifest(mode)
-  const seedBase = hashSeed(`${date}:${mode}`)
-
+function calculerRepartition(seedBase: number): { nombreIA: number; nombreReelles: number } {
   const repartitionRand = creerGenerateur(seedBase)()
   const nombreIA = repartitionRand < 0.5 ? 2 : 3
-  const nombreReelles = 5 - nombreIA
+  return { nombreIA, nombreReelles: 5 - nombreIA }
+}
 
-  const imagesIA = choisirNAvecSeed(manifest.ai, nombreIA, seedBase + 1)
-  const imagesReelles = choisirNAvecSeed(manifest.real, nombreReelles, seedBase + 2)
+// Genere les 5 images d'une partie de facon deterministe pour (date, mode).
+// - painting : images IA + reelles depuis le manifest statique local
+// - realistic : images IA depuis le manifest local, images reelles depuis
+//   l'API Unsplash (cachees par jour, voir cache-quotidien.ts)
+export async function genererPartieDuJour(date: string, mode: ModeJeu): Promise<Image[]> {
+  const manifest = lireManifest(mode)
+  const seedBase = hashSeed(`${date}:${mode}`)
+  const { nombreIA, nombreReelles } = calculerRepartition(seedBase)
 
-  const selection: Image[] = [
-    ...imagesIA.map((entry, index) => ({
-      id: `${mode}-ai-${entry.file}`,
-      url: `/images/${mode}/ai/${entry.file}`,
+  const imagesIA = choisirNAvecSeed(manifest.ai, nombreIA, seedBase + 1).map((entry) => ({
+    id: `${mode}-ai-${entry.file}`,
+    url: `/images/${mode}/ai/${entry.file}`,
+    categorie: mode,
+    est_ia: true,
+    credits: entry.credits,
+  }))
+
+  let imagesReelles: Image[]
+
+  if (mode === 'realistic') {
+    const photos = await obtenirPhotosDuJour(date)
+    const photosChoisies = choisirNAvecSeed(photos, nombreReelles, seedBase + 2)
+    imagesReelles = photosChoisies.map((photo) => ({
+      id: `realistic-unsplash-${photo.id}`,
+      url: photo.url,
       categorie: mode,
-      est_ia: true,
-      credits: entry.credits,
-    })),
-    ...imagesReelles.map((entry, index) => ({
+      est_ia: false,
+      credits: `Photo de ${photo.attribution.photographeNom} sur Unsplash`,
+      attributionUnsplash: photo.attribution,
+    }))
+  } else {
+    imagesReelles = choisirNAvecSeed(manifest.real, nombreReelles, seedBase + 2).map((entry) => ({
       id: `${mode}-real-${entry.file}`,
       url: `/images/${mode}/real/${entry.file}`,
       categorie: mode,
       est_ia: false,
       credits: entry.credits,
-    })),
-  ]
+    }))
+  }
 
+  const selection: Image[] = [...imagesIA, ...imagesReelles]
   return melangerAvecSeed(selection, seedBase + 3)
 }
 
 // Retrouve une image du jour par son id (pour la verification cote serveur)
-export function trouverImageParId(date: string, mode: ModeJeu, imageId: string): Image | null {
-  const images = genererPartieDuJour(date, mode)
+export async function trouverImageParId(date: string, mode: ModeJeu, imageId: string): Promise<Image | null> {
+  const images = await genererPartieDuJour(date, mode)
   return images.find((img) => img.id === imageId) || null
 }

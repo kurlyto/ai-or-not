@@ -3,12 +3,20 @@
 export type ModeJeu = 'realistic' | 'painting'
 export type ReponseUtilisateur = 'ai' | 'not_ai'
 
+export interface AttributionUnsplash {
+  photographeNom: string
+  photographeUrl: string
+  photoUrl: string
+  downloadLocation: string
+}
+
 export interface Image {
   id: string
   url: string
   categorie: ModeJeu
   est_ia: boolean
   credits?: string
+  attributionUnsplash?: AttributionUnsplash
 }
 
 export interface Reponse {

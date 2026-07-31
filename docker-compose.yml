@@ -5,8 +5,11 @@ services:
       dockerfile: Dockerfile
     container_name: ai-or-not
     restart: unless-stopped
+    env_file: .env
     ports:
       - "127.0.0.1:3104:3000"
+    volumes:
+      - unsplash-cache:/app/data
     mem_limit: 512m
     cpus: 1.0
     logging:
@@ -14,3 +17,6 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+
+volumes:
+  unsplash-cache:
