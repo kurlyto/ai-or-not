@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
+import { Chakra_Petch, Manrope, Sora } from 'next/font/google'
 import { FondAnime } from '@/components/ui/fond-anime'
 import '../styles/globals.css'
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const chakraPetch = Chakra_Petch({ subsets: ['latin'], weight: ['600', '700'], variable: '--font-heading' })
+const manrope = Manrope({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-body' })
+const sora = Sora({ subsets: ['latin'], weight: ['500', '600', '700'], variable: '--font-button' })
 
 export const metadata: Metadata = {
   title: 'AI or Not - Le jeu quotidien de détection IA',
@@ -35,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr" className={inter.variable}>
+    <html lang="fr" className={`${chakraPetch.variable} ${manrope.variable} ${sora.variable}`}>
       <body className="font-sans">
         <FondAnime />
         <div className="relative z-10">{children}</div>

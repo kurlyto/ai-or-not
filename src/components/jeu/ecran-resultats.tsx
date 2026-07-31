@@ -28,14 +28,14 @@ export function EcranResultats({ resultat, onRejouer, onRepartager }: EcranResul
   return (
     <div className="mx-auto flex max-w-md flex-col items-center gap-5 py-2">
       <div className="animate-fade-in-up space-y-1 text-center">
-        <h2 className="text-xl font-bold text-white sm:text-2xl">Partie terminée</h2>
+        <h2 className="font-heading text-xl font-bold text-white sm:text-2xl">Partie terminée</h2>
         <p className="text-sm text-gray-400">
           Mode {resultat.mode === 'painting' ? '🎨 Peinture' : '📸 Réaliste'}
         </p>
       </div>
 
       <div className="glass-card animate-pop-in flex flex-col items-center gap-1.5 rounded-3xl px-8 py-5">
-        <div className="text-5xl font-extrabold text-white">
+        <div className="font-heading text-5xl font-bold text-white">
           {resultat.score}
           <span className="text-2xl text-gray-500">/{resultat.total}</span>
         </div>

@@ -16,7 +16,7 @@ export function BoutonsChoix({ onReponse, isLoading = false, disabled = false }:
         type="button"
         onClick={() => onReponse('ai')}
         disabled={bloque}
-        className="group flex min-h-[64px] flex-col items-center justify-center gap-1 rounded-2xl border-2 border-dark-border bg-dark-tertiary px-4 py-3 font-semibold text-white transition-all duration-150 hover:border-accent-purple hover:bg-accent-purple/10 active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-40 disabled:active:scale-100"
+        className="font-button group flex min-h-[64px] flex-col items-center justify-center gap-1 rounded-2xl border-2 border-dark-border bg-dark-tertiary px-4 py-3 font-semibold text-white transition-all duration-150 hover:border-accent-purple hover:bg-accent-purple/10 active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-40 disabled:active:scale-100"
       >
         <span className="text-2xl transition-transform group-hover:scale-110" aria-hidden>
           🤖
@@ -28,7 +28,7 @@ export function BoutonsChoix({ onReponse, isLoading = false, disabled = false }:
         type="button"
         onClick={() => onReponse('not_ai')}
         disabled={bloque}
-        className="group flex min-h-[64px] flex-col items-center justify-center gap-1 rounded-2xl border-2 border-dark-border bg-dark-tertiary px-4 py-3 font-semibold text-white transition-all duration-150 hover:border-accent-green hover:bg-accent-green/10 active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-40 disabled:active:scale-100"
+        className="font-button group flex min-h-[64px] flex-col items-center justify-center gap-1 rounded-2xl border-2 border-dark-border bg-dark-tertiary px-4 py-3 font-semibold text-white transition-all duration-150 hover:border-accent-green hover:bg-accent-green/10 active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-40 disabled:active:scale-100"
       >
         <span className="text-2xl transition-transform group-hover:scale-110" aria-hidden>
           📷

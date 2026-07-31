@@ -29,7 +29,7 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
 
       <div className="modal-content animate-fade-in-up relative">
         <div className="sticky top-0 z-10 flex items-center justify-between border-b border-dark-border bg-dark-secondary/95 px-5 py-4 backdrop-blur">
-          <h2 className="text-lg font-semibold text-white">{title}</h2>
+          <h2 className="font-heading text-lg font-semibold text-white">{title}</h2>
           <button
             onClick={onClose}
             aria-label="Fermer"

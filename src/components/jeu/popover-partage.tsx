@@ -51,7 +51,7 @@ export function PopoverPartage({ donnees, onFermer }: PopoverPartageProps) {
           </svg>
         </button>
 
-        <div className="mb-5 mt-2 text-5xl font-extrabold text-white">
+        <div className="font-heading mb-5 mt-2 text-5xl font-bold text-white">
           {donnees.score}
           <span className="text-2xl text-gray-500">/{donnees.total}</span>
         </div>

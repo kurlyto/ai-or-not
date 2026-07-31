@@ -20,7 +20,9 @@ module.exports = {
         'accent-purple': '#a855f7',
       },
       fontFamily: {
-        sans: ['var(--font-inter)', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        sans: ['var(--font-body)', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        heading: ['var(--font-heading)', 'var(--font-body)', 'sans-serif'],
+        button: ['var(--font-button)', 'var(--font-body)', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.4s ease-out',

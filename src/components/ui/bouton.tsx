@@ -20,7 +20,7 @@ export function Bouton({
   type = 'button',
 }: BoutonProps) {
   const baseClasses =
-    'inline-flex items-center justify-center gap-2 font-semibold rounded-xl transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue focus-visible:ring-offset-2 focus-visible:ring-offset-dark-primary active:scale-[0.97]'
+    'font-button inline-flex items-center justify-center gap-2 font-semibold rounded-xl transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue focus-visible:ring-offset-2 focus-visible:ring-offset-dark-primary active:scale-[0.97]'
 
   const variantClasses = {
     primary: 'bg-accent-blue text-white shadow-glow hover:bg-[#3d68f0]',

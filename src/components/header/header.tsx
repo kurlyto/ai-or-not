@@ -19,9 +19,9 @@ export function Header({ onSelectionnerDate }: HeaderProps) {
     <>
       <header className="sticky top-0 z-30 border-b border-dark-border bg-dark-primary/80 backdrop-blur-md">
         <div className="container mx-auto flex items-center justify-between px-4 py-3.5">
-          <div className="flex items-center gap-1.5 text-lg font-bold text-white">
+          <div className="font-heading flex items-center gap-1.5 text-lg font-bold text-white">
             <span aria-hidden>🎭</span>
-            <span className="hidden xs:inline">AI or Not</span>
+            <span className="hidden xs:inline">AI or Not?</span>
           </div>
 
           <nav className="flex items-center gap-1">
