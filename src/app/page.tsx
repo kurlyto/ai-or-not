@@ -7,6 +7,7 @@ import { ZoneImage } from '@/components/jeu/zone-image'
 import { BoutonsChoix } from '@/components/jeu/boutons-choix'
 import { IndicateurProgression } from '@/components/jeu/indicateur-progression'
 import { EcranResultats } from '@/components/jeu/ecran-resultats'
+import { PopoverPartage } from '@/components/jeu/popover-partage'
 import { ModeJeu, PartieEnCours, ResultatPartie, ReponseUtilisateur } from '@/types'
 import {
   creerNouvellePartie,
@@ -33,6 +34,7 @@ export default function HomePage() {
   const [error, setError] = useState<string | null>(null)
   const [dateSelectionnee, setDateSelectionnee] = useState<string | null>(null)
   const [feedback, setFeedback] = useState<FeedbackReponse | null>(null)
+  const [popoverPartageVisible, setPopoverPartageVisible] = useState(false)
 
   const demarrerJeu = async (mode: ModeJeu) => {
     setIsLoading(true)
@@ -116,6 +118,7 @@ export default function HomePage() {
             marquerModeJoue(partie.mode)
           }
           setEtatJeu('resultats')
+          setPopoverPartageVisible(true)
         } else {
           setPartie(passerImageSuivante(partieMiseAJour))
         }
@@ -141,6 +144,7 @@ export default function HomePage() {
     setError(null)
     setFeedback(null)
     setDateSelectionnee(null)
+    setPopoverPartageVisible(false)
   }
 
   const obtenirResultatActuel = (): ResultatPartie | null => {
@@ -189,7 +193,24 @@ export default function HomePage() {
           })()}
 
         {etatJeu === 'resultats' && partie && (
-          <EcranResultats resultat={obtenirResultatActuel()!} onRejouer={rejouer} />
+          <>
+            <EcranResultats
+              resultat={obtenirResultatActuel()!}
+              onRejouer={rejouer}
+              onRepartager={() => setPopoverPartageVisible(true)}
+            />
+            {popoverPartageVisible && (
+              <PopoverPartage
+                donnees={{
+                  score: obtenirResultatActuel()!.score,
+                  total: obtenirResultatActuel()!.total,
+                  mode: partie.mode,
+                  date_jeu: partie.date_jeu,
+                }}
+                onFermer={() => setPopoverPartageVisible(false)}
+              />
+            )}
+          </>
         )}
       </div>
     </main>

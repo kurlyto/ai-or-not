@@ -3,28 +3,29 @@ import { DonneesPartage, ResultatPartie } from '@/types'
 // Phrases de défi variées selon le score, pour donner envie de partager
 const DEFIS_PAR_SCORE: Record<number, string[]> = {
   5: [
-    'Score parfait ! Votre grand-mère fera-t-elle aussi bien ? Défiez-la !',
-    "5/5, sans faute ! Quelqu'un peut-il faire mieux dans votre entourage ?",
+    "Score parfait, 5/5. Tu fais moins bien ? Tu me dois une bière. T'es chaud ?",
+    'Sans faute ! Qui ose se mesurer à moi ?',
+    'Score parfait ! Ta grand-mère peut-elle faire mieux ?',
   ],
   4: [
-    'Votre grand-mère aura-t-elle plus de 4/5 ? Défiez-la !',
-    'Presque parfait ! Qui peut faire mieux que vous ?',
+    "4/5, presque parfait. T'es capable de faire mieux ?",
+    'Ta grand-mère aura-t-elle plus de 4/5 ? Défie-la !',
   ],
   3: [
-    'Votre grand-mère aura-t-elle plus de 3/5 ? Défiez-la !',
-    "La moyenne, mais l'IA vous a bien eu sur certaines. À vous de faire mieux ?",
+    "3/5... Tu penses que ta grand-mère peut faire mieux ?",
+    "La moyenne, mais l'IA m'a bien eu sur certaines. À toi de faire mieux ?",
   ],
   2: [
-    "L'IA vous a bien eu cette fois. Qui saura mieux repérer les pièges ?",
-    "2/5... Votre entourage saura-t-il faire mieux face à l'IA ?",
+    "L'IA m'a bien eu cette fois (2/5). Toi, tu sauras repérer les pièges ?",
+    "2/5... Même ta grand-mère ferait mieux, non ?",
   ],
   1: [
-    "L'IA vous a berné presque à chaque fois ! Vengez-vous, ou trouvez quelqu'un de plus fort.",
-    "1/5, l'IA est passée maître dans l'art de vous tromper. À qui le tour ?",
+    "L'IA m'a berné presque à chaque fois (1/5). Venge-moi, ou avoue que tu feras pire.",
+    "1/5, l'IA m'a totalement eu. À qui le tour ?",
   ],
   0: [
-    "0/5 : l'IA vous a totalement berné ! Quelqu'un fera forcément mieux.",
-    "Match nul face à l'IA (0/5). Qui osera relever le défi ?",
+    "0/5 : l'IA m'a totalement berné ! Quelqu'un peut forcément faire mieux.",
+    "Match nul face à l'IA (0/5). Tu oses relever le défi ?",
   ],
 }
 
@@ -88,7 +89,9 @@ export async function copierDansPressePapiers(texte: string): Promise<boolean> {
   }
 }
 
-// Fonction pour partager via l'API Web Share (mobile)
+// Fonction pour partager via l'API Web Share (mobile + desktop compatibles :
+// ouvre le sélecteur natif de l'appareil avec toutes les apps installées,
+// y compris Instagram/Messenger qui n'ont pas de lien de partage direct)
 export async function partagerViaWebShare(donnees: DonneesPartage): Promise<boolean> {
   try {
     if (navigator.share) {
@@ -102,69 +105,32 @@ export async function partagerViaWebShare(donnees: DonneesPartage): Promise<bool
     }
     return false
   } catch (error) {
+    // AbortError = l'utilisateur a annulé le partage, ce n'est pas une erreur
+    if (error instanceof Error && error.name === 'AbortError') return true
     console.error('Erreur lors du partage:', error)
     return false
   }
 }
 
-// Fonction pour générer un lien de partage personnalisé
-export function genererLienPartagePersonnalise(donnees: DonneesPartage): string {
-  const baseUrl = obtenirLienJeu()
-  const params = new URLSearchParams({
-    score: donnees.score.toString(),
-    total: donnees.total.toString(),
-    mode: donnees.mode,
-    date_jeu: donnees.date_jeu,
-  })
-
-  return `${baseUrl}?share=${btoa(params.toString())}`
+// Fonction pour vérifier si le partage natif est disponible sur cet appareil
+export function partageNatifDisponible(): boolean {
+  return typeof navigator !== 'undefined' && !!navigator.share
 }
 
-// Fonction pour décoder un lien de partage
-export function decoderLienPartage(encodedParams: string): DonneesPartage | null {
-  try {
-    const params = new URLSearchParams(atob(encodedParams))
-    return {
-      score: parseInt(params.get('score') || '0'),
-      total: parseInt(params.get('total') || '5'),
-      mode: (params.get('mode') as 'realistic' | 'painting') || 'realistic',
-      date_jeu: params.get('date_jeu') || new Date().toISOString().split('T')[0],
-    }
-  } catch (error) {
-    console.error('Erreur lors du décodage du lien:', error)
-    return null
-  }
-}
-
-// Fonction pour obtenir les options de partage disponibles
-export function obtenirOptionsPartage(): {
-  webShare: boolean
-  clipboard: boolean
-  twitter: boolean
-  facebook: boolean
+// Fonction pour générer les liens de partage directs (WhatsApp, SMS, X).
+// Instagram et Messenger n'ont pas d'URL scheme public pour pré-remplir un
+// message : ils ne sont accessibles que via le partage natif ci-dessus.
+export function genererLiensPartageDirects(donnees: DonneesPartage): {
+  whatsapp: string
+  sms: string
+  x: string
 } {
-  return {
-    webShare: typeof navigator !== 'undefined' && !!navigator.share,
-    clipboard: typeof navigator !== 'undefined' && !!navigator.clipboard,
-    twitter: true,
-    facebook: true,
-  }
-}
-
-// Fonction pour générer les URLs de partage social
-export function genererUrlsPartageSocial(donnees: DonneesPartage): {
-  twitter: string
-  facebook: string
-  linkedin: string
-} {
-  const texte = genererTextePartage(donnees)
-  const lien = obtenirLienJeu()
+  const texte = genererTextePartageAvecLien(donnees)
   const texteEncode = encodeURIComponent(texte)
-  const lienEncode = encodeURIComponent(lien)
 
   return {
-    twitter: `https://twitter.com/intent/tweet?text=${texteEncode}&url=${lienEncode}`,
-    facebook: `https://www.facebook.com/sharer/sharer.php?u=${lienEncode}&quote=${texteEncode}`,
-    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${lienEncode}`,
+    whatsapp: `https://wa.me/?text=${texteEncode}`,
+    sms: `sms:?&body=${texteEncode}`,
+    x: `https://twitter.com/intent/tweet?text=${texteEncode}`,
   }
 }

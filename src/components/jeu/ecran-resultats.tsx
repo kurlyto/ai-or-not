@@ -3,11 +3,11 @@
 import React, { useState } from 'react'
 import { Bouton } from '@/components/ui/bouton'
 import { ResultatPartie } from '@/types'
-import { genererTextePartageAvecLien, copierDansPressePapiers, partagerViaWebShare } from '@/lib/utils/partage'
 
 interface EcranResultatsProps {
   resultat: ResultatPartie
   onRejouer: () => void
+  onRepartager: () => void
 }
 
 function getMessageScore(score: number): string {
@@ -18,29 +18,9 @@ function getMessageScore(score: number): string {
   return "L'IA vous a bien eu cette fois. Retentez votre chance !"
 }
 
-export function EcranResultats({ resultat, onRejouer }: EcranResultatsProps) {
-  const [copie, setCopie] = useState(false)
+export function EcranResultats({ resultat, onRejouer, onRepartager }: EcranResultatsProps) {
   const [imageAgrandie, setImageAgrandie] = useState<number | null>(null)
   const pourcentage = Math.round((resultat.score / resultat.total) * 100)
-
-  const handlePartager = async () => {
-    const donnees = {
-      score: resultat.score,
-      total: resultat.total,
-      mode: resultat.mode,
-      date_jeu: resultat.date_jeu,
-    }
-
-    const viaShare = await partagerViaWebShare(donnees)
-    if (viaShare) return
-
-    const texte = genererTextePartageAvecLien(donnees)
-    const reussi = await copierDansPressePapiers(texte)
-    if (reussi) {
-      setCopie(true)
-      window.setTimeout(() => setCopie(false), 2000)
-    }
-  }
 
   const imageSelectionnee = imageAgrandie !== null ? resultat.images[imageAgrandie] : null
   const reponseSelectionnee = imageAgrandie !== null ? resultat.reponses[imageAgrandie] : null
@@ -96,8 +76,8 @@ export function EcranResultats({ resultat, onRejouer }: EcranResultatsProps) {
         <Bouton onClick={onRejouer} variant="primary" size="lg" className="flex-1">
           🔄 Rejouer
         </Bouton>
-        <Bouton onClick={handlePartager} variant="secondary" size="lg" className="flex-1">
-          {copie ? '✓ Copié !' : '📤 Partager'}
+        <Bouton onClick={onRepartager} variant="secondary" size="lg" className="flex-1">
+          📤 Partager
         </Bouton>
       </div>
 
@@ -131,7 +111,7 @@ export function EcranResultats({ resultat, onRejouer }: EcranResultatsProps) {
                   {reponseSelectionnee.estCorrecte ? '✓ Correct' : '✕ Raté'}
                 </span>
               </div>
-              {imageSelectionnee.attributionUnsplash && (
+              {imageSelectionnee.attributionUnsplash ? (
                 <p className="bg-dark-secondary px-4 py-2 text-xs text-gray-400">
                   Photo de{' '}
                   <a
@@ -152,7 +132,9 @@ export function EcranResultats({ resultat, onRejouer }: EcranResultatsProps) {
                     Unsplash
                   </a>
                 </p>
-              )}
+              ) : imageSelectionnee.credits ? (
+                <p className="bg-dark-secondary px-4 py-2 text-xs text-gray-400">{imageSelectionnee.credits}</p>
+              ) : null}
             </div>
           </div>
         </div>
