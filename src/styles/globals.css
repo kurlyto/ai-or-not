@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --dark-primary: #0a0a0d;
+  --dark-secondary: #15151b;
+  --dark-tertiary: #1f1f27;
+  --dark-border: #2a2a35;
+  --accent-blue: #4f7dff;
+  --accent-green: #22c55e;
+  --accent-red: #f43f5e;
+  --accent-yellow: #f59e0b;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(79, 125, 255, 0.12), transparent),
+    var(--dark-primary);
+  background-attachment: fixed;
+  color: white;
+  overflow-x: hidden;
+  min-height: 100dvh;
+}
+
+/* Empeche le tap-highlight bleu par defaut sur mobile (on gere nos propres etats) */
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.bg-dark-primary {
+  background-color: var(--dark-primary);
+}
+
+.bg-dark-secondary {
+  background-color: var(--dark-secondary);
+}
+
+.bg-dark-tertiary {
+  background-color: var(--dark-tertiary);
+}
+
+.border-dark {
+  border-color: var(--dark-border);
+}
+
+/* Carte avec effet verre depoli leger, coherent sur toute l'app */
+.glass-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+  border: 1px solid var(--dark-border);
+  backdrop-filter: blur(12px);
+}
+
+.modal-overlay {
+  @apply fixed inset-0 z-50 flex items-end justify-center sm:items-center;
+}
+
+.modal-content {
+  @apply relative w-full max-w-2xl overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-dark-secondary shadow-dark-lg;
+  max-height: calc(90dvh - var(--safe-bottom));
+  border: 1px solid var(--dark-border);
+}
+
+.image-container {
+  @apply relative mx-auto aspect-[4/3] w-full max-w-2xl overflow-hidden rounded-2xl shadow-dark-lg;
+  background: linear-gradient(135deg, var(--dark-tertiary), var(--dark-secondary));
+}
+
+@media (max-width: 640px) {
+  .container {
+    @apply px-4;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--dark-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3a3a47;
+}
+
+/* Skeleton de chargement d'image */
+.skeleton {
+  background: linear-gradient(90deg, var(--dark-tertiary) 25%, #2a2a35 37%, var(--dark-tertiary) 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

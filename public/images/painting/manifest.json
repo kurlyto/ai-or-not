@@ -1,0 +1,702 @@
+{
+  "real": [
+    {
+      "file": "real-001.jpg",
+      "credits": "Alfred Sisley (peinture classique)"
+    },
+    {
+      "file": "real-002.jpg",
+      "credits": "Alfred Sisley (peinture classique)"
+    },
+    {
+      "file": "real-003.jpg",
+      "credits": "Alfred Sisley (peinture classique)"
+    },
+    {
+      "file": "real-004.jpg",
+      "credits": "Alfred Sisley (peinture classique)"
+    },
+    {
+      "file": "real-005.jpg",
+      "credits": "Alfred Sisley (peinture classique)"
+    },
+    {
+      "file": "real-006.jpg",
+      "credits": "Alfred Sisley (peinture classique)"
+    },
+    {
+      "file": "real-007.jpg",
+      "credits": "Alfred Sisley (peinture classique)"
+    },
+    {
+      "file": "real-008.jpg",
+      "credits": "Amedeo Modigliani (peinture classique)"
+    },
+    {
+      "file": "real-009.jpg",
+      "credits": "Amedeo Modigliani (peinture classique)"
+    },
+    {
+      "file": "real-010.jpg",
+      "credits": "Amedeo Modigliani (peinture classique)"
+    },
+    {
+      "file": "real-011.jpg",
+      "credits": "Amedeo Modigliani (peinture classique)"
+    },
+    {
+      "file": "real-012.jpg",
+      "credits": "Amedeo Modigliani (peinture classique)"
+    },
+    {
+      "file": "real-013.jpg",
+      "credits": "Amedeo Modigliani (peinture classique)"
+    },
+    {
+      "file": "real-014.jpg",
+      "credits": "Amedeo Modigliani (peinture classique)"
+    },
+    {
+      "file": "real-015.jpg",
+      "credits": "Camille Pissarro (peinture classique)"
+    },
+    {
+      "file": "real-016.jpg",
+      "credits": "Camille Pissarro (peinture classique)"
+    },
+    {
+      "file": "real-017.jpg",
+      "credits": "Camille Pissarro (peinture classique)"
+    },
+    {
+      "file": "real-018.jpg",
+      "credits": "Camille Pissarro (peinture classique)"
+    },
+    {
+      "file": "real-019.jpg",
+      "credits": "Camille Pissarro (peinture classique)"
+    },
+    {
+      "file": "real-020.jpg",
+      "credits": "Camille Pissarro (peinture classique)"
+    },
+    {
+      "file": "real-021.jpg",
+      "credits": "Camille Pissarro (peinture classique)"
+    },
+    {
+      "file": "real-022.jpg",
+      "credits": "Claude Monet (peinture classique)"
+    },
+    {
+      "file": "real-023.jpg",
+      "credits": "Claude Monet (peinture classique)"
+    },
+    {
+      "file": "real-024.jpg",
+      "credits": "Claude Monet (peinture classique)"
+    },
+    {
+      "file": "real-025.jpg",
+      "credits": "Claude Monet (peinture classique)"
+    },
+    {
+      "file": "real-026.jpg",
+      "credits": "Claude Monet (peinture classique)"
+    },
+    {
+      "file": "real-027.jpg",
+      "credits": "Claude Monet (peinture classique)"
+    },
+    {
+      "file": "real-028.jpg",
+      "credits": "Claude Monet (peinture classique)"
+    },
+    {
+      "file": "real-029.jpg",
+      "credits": "Diego Rivera (peinture classique)"
+    },
+    {
+      "file": "real-030.jpg",
+      "credits": "Diego Rivera (peinture classique)"
+    },
+    {
+      "file": "real-031.jpg",
+      "credits": "Diego Rivera (peinture classique)"
+    },
+    {
+      "file": "real-032.jpg",
+      "credits": "Diego Rivera (peinture classique)"
+    },
+    {
+      "file": "real-033.jpg",
+      "credits": "Diego Rivera (peinture classique)"
+    },
+    {
+      "file": "real-034.jpg",
+      "credits": "Diego Rivera (peinture classique)"
+    },
+    {
+      "file": "real-035.jpg",
+      "credits": "Diego Rivera (peinture classique)"
+    },
+    {
+      "file": "real-036.jpg",
+      "credits": "Edvard Munch (peinture classique)"
+    },
+    {
+      "file": "real-037.jpg",
+      "credits": "Edvard Munch (peinture classique)"
+    },
+    {
+      "file": "real-038.jpg",
+      "credits": "Edvard Munch (peinture classique)"
+    },
+    {
+      "file": "real-039.jpg",
+      "credits": "Edvard Munch (peinture classique)"
+    },
+    {
+      "file": "real-040.jpg",
+      "credits": "Edvard Munch (peinture classique)"
+    },
+    {
+      "file": "real-041.jpg",
+      "credits": "Edvard Munch (peinture classique)"
+    },
+    {
+      "file": "real-042.jpg",
+      "credits": "Edvard Munch (peinture classique)"
+    },
+    {
+      "file": "real-043.jpg",
+      "credits": "El Greco (peinture classique)"
+    },
+    {
+      "file": "real-044.jpg",
+      "credits": "El Greco (peinture classique)"
+    },
+    {
+      "file": "real-045.jpg",
+      "credits": "El Greco (peinture classique)"
+    },
+    {
+      "file": "real-046.jpg",
+      "credits": "El Greco (peinture classique)"
+    },
+    {
+      "file": "real-047.jpg",
+      "credits": "El Greco (peinture classique)"
+    },
+    {
+      "file": "real-048.jpg",
+      "credits": "El Greco (peinture classique)"
+    },
+    {
+      "file": "real-049.jpg",
+      "credits": "El Greco (peinture classique)"
+    },
+    {
+      "file": "real-050.jpg",
+      "credits": "Eugene Delacroix (peinture classique)"
+    },
+    {
+      "file": "real-051.jpg",
+      "credits": "Eugene Delacroix (peinture classique)"
+    },
+    {
+      "file": "real-052.jpg",
+      "credits": "Eugene Delacroix (peinture classique)"
+    },
+    {
+      "file": "real-053.jpg",
+      "credits": "Eugene Delacroix (peinture classique)"
+    },
+    {
+      "file": "real-054.jpg",
+      "credits": "Eugene Delacroix (peinture classique)"
+    },
+    {
+      "file": "real-055.jpg",
+      "credits": "Eugene Delacroix (peinture classique)"
+    },
+    {
+      "file": "real-056.jpg",
+      "credits": "Eugene Delacroix (peinture classique)"
+    },
+    {
+      "file": "real-057.jpg",
+      "credits": "Frida Kahlo (peinture classique)"
+    },
+    {
+      "file": "real-058.jpg",
+      "credits": "Frida Kahlo (peinture classique)"
+    },
+    {
+      "file": "real-059.jpg",
+      "credits": "Frida Kahlo (peinture classique)"
+    },
+    {
+      "file": "real-060.jpg",
+      "credits": "Frida Kahlo (peinture classique)"
+    },
+    {
+      "file": "real-061.jpg",
+      "credits": "Frida Kahlo (peinture classique)"
+    },
+    {
+      "file": "real-062.jpg",
+      "credits": "Frida Kahlo (peinture classique)"
+    },
+    {
+      "file": "real-063.jpg",
+      "credits": "Frida Kahlo (peinture classique)"
+    },
+    {
+      "file": "real-064.jpg",
+      "credits": "Gustave Courbet (peinture classique)"
+    },
+    {
+      "file": "real-065.jpg",
+      "credits": "Gustave Courbet (peinture classique)"
+    },
+    {
+      "file": "real-066.jpg",
+      "credits": "Gustave Courbet (peinture classique)"
+    },
+    {
+      "file": "real-067.jpg",
+      "credits": "Gustave Courbet (peinture classique)"
+    },
+    {
+      "file": "real-068.jpg",
+      "credits": "Gustave Courbet (peinture classique)"
+    },
+    {
+      "file": "real-069.jpg",
+      "credits": "Gustave Courbet (peinture classique)"
+    },
+    {
+      "file": "real-070.jpg",
+      "credits": "Gustave Courbet (peinture classique)"
+    },
+    {
+      "file": "real-071.jpg",
+      "credits": "Peter Paul Rubens (peinture classique)"
+    },
+    {
+      "file": "real-072.jpg",
+      "credits": "Peter Paul Rubens (peinture classique)"
+    },
+    {
+      "file": "real-073.jpg",
+      "credits": "Peter Paul Rubens (peinture classique)"
+    },
+    {
+      "file": "real-074.jpg",
+      "credits": "Peter Paul Rubens (peinture classique)"
+    },
+    {
+      "file": "real-075.jpg",
+      "credits": "Peter Paul Rubens (peinture classique)"
+    },
+    {
+      "file": "real-076.jpg",
+      "credits": "Peter Paul Rubens (peinture classique)"
+    },
+    {
+      "file": "real-077.jpg",
+      "credits": "Peter Paul Rubens (peinture classique)"
+    },
+    {
+      "file": "real-078.jpg",
+      "credits": "Pierre-Auguste Renoir (peinture classique)"
+    },
+    {
+      "file": "real-079.jpg",
+      "credits": "Pierre-Auguste Renoir (peinture classique)"
+    },
+    {
+      "file": "real-080.jpg",
+      "credits": "Pierre-Auguste Renoir (peinture classique)"
+    },
+    {
+      "file": "real-081.jpg",
+      "credits": "Pierre-Auguste Renoir (peinture classique)"
+    },
+    {
+      "file": "real-082.jpg",
+      "credits": "Pierre-Auguste Renoir (peinture classique)"
+    },
+    {
+      "file": "real-083.jpg",
+      "credits": "Pierre-Auguste Renoir (peinture classique)"
+    },
+    {
+      "file": "real-084.jpg",
+      "credits": "Pierre-Auguste Renoir (peinture classique)"
+    }
+  ],
+  "ai": [
+    {
+      "file": "ai-001.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-002.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-003.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-004.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-005.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-006.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-007.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-008.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-009.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-010.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-011.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-012.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-013.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-014.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-015.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-016.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-017.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-018.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-019.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-020.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-021.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-022.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-023.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-024.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-025.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-026.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-027.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-028.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-029.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-030.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-031.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-032.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-033.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-034.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-035.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-036.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-037.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-038.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-039.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-040.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-041.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-042.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-043.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-044.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-045.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-046.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-047.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-048.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-049.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-050.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-051.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-052.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-053.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-054.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-055.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-056.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-057.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-058.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-059.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-060.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-061.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-062.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-063.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-064.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-065.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-066.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-067.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-068.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-069.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-070.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-071.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-072.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-073.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-074.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-075.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-076.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-077.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-078.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-079.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-080.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-081.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-082.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-083.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-084.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-085.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-086.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-087.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-088.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-089.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    },
+    {
+      "file": "ai-090.jpg",
+      "credits": "Generation IA (Stable Diffusion)"
+    }
+  ]
+}
