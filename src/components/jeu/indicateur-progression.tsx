@@ -41,7 +41,7 @@ export function IndicateurProgression({ partie }: IndicateurProgressionProps) {
         </span>
         <span className="hidden sm:inline text-dark-border">•</span>
         <span className="hidden sm:inline">
-          {partie.mode === 'painting' ? '🎨 Peinture' : '📸 Realiste'}
+          {partie.mode === 'painting' ? '🎨 Peinture' : '📸 Réaliste'}
         </span>
         <span className="rounded-full bg-dark-tertiary px-2.5 py-1 font-medium text-white">
           {score} pt{score > 1 ? 's' : ''}

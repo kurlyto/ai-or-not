@@ -18,9 +18,9 @@ export function ZoneImage({ image, feedback }: ZoneImageProps) {
 
   useEffect(() => {
     setImageError(false)
-    // L'image peut deja etre en cache navigateur au moment du mount : dans ce
-    // cas l'evenement onLoad ne se declenchera jamais, donc on verifie
-    // manuellement `complete` pour eviter de rester bloque sur opacity-0.
+    // L'image peut déjà être en cache navigateur au moment du mount : dans ce
+    // cas l'évènement onLoad ne se déclenchera jamais, donc on vérifie
+    // manuellement `complete` pour éviter de rester bloqué sur opacity-0.
     setImageChargee(imgRef.current?.complete ?? false)
   }, [image.id])
 
@@ -48,7 +48,7 @@ export function ZoneImage({ image, feedback }: ZoneImageProps) {
         <img
           ref={imgRef}
           src={image.url}
-          alt="Devinez : image reelle ou generee par IA ?"
+          alt="Devinez : image réelle ou générée par IA ?"
           className={`h-full w-full object-cover transition-opacity duration-300 ${
             imageChargee ? 'opacity-100' : 'opacity-0'
           }`}
@@ -71,7 +71,7 @@ export function ZoneImage({ image, feedback }: ZoneImageProps) {
           >
             <span>{feedback.estCorrecte ? '✓ Correct' : '✕ Raté'}</span>
             <span className="opacity-80">
-              — c&apos;etait {feedback.reponseCorrecte === 'ai' ? 'une image IA' : 'une image reelle'}
+              — c&apos;était {feedback.reponseCorrecte === 'ai' ? 'une image IA' : 'une image réelle'}
             </span>
           </div>
 

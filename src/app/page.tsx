@@ -149,12 +149,12 @@ export default function HomePage() {
   }
 
   return (
-    <main className="min-h-screen bg-dark-primary text-white">
+    <main className="flex h-dvh flex-col overflow-hidden bg-dark-primary text-white">
       <Header onSelectionnerDate={handleDateSelection} />
 
-      <div className="container mx-auto px-4 pb-10 pt-6 sm:pb-16">
+      <div className="container mx-auto flex min-h-0 flex-1 flex-col justify-center px-4 py-3">
         {error && (
-          <div className="mx-auto mb-6 max-w-lg rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-center">
+          <div className="mx-auto mb-4 max-w-lg rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-center">
             <p className="text-red-200">{error}</p>
             <button
               onClick={() => setError(null)}
@@ -178,7 +178,7 @@ export default function HomePage() {
           (() => {
             const imageActuelle = obtenirImageActuelle(partie)
             return (
-              <div className="mx-auto flex max-w-2xl flex-col gap-6">
+              <div className="mx-auto flex w-full max-w-2xl min-h-0 flex-1 flex-col justify-center gap-4">
                 <IndicateurProgression partie={partie} />
 
                 {imageActuelle && <ZoneImage image={imageActuelle} feedback={feedback} />}

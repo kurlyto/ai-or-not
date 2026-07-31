@@ -21,7 +21,7 @@ export function BoutonsChoix({ onReponse, isLoading = false, disabled = false }:
         <span className="text-2xl transition-transform group-hover:scale-110" aria-hidden>
           🤖
         </span>
-        <span>Generee par IA</span>
+        <span>Générée par IA</span>
       </button>
 
       <button
@@ -33,7 +33,7 @@ export function BoutonsChoix({ onReponse, isLoading = false, disabled = false }:
         <span className="text-2xl transition-transform group-hover:scale-110" aria-hidden>
           📷
         </span>
-        <span>Image reelle</span>
+        <span>Image réelle</span>
       </button>
     </div>
   )

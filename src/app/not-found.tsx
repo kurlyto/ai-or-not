@@ -7,7 +7,7 @@ export default function NotFound() {
       <div className="space-y-5 text-center px-4">
         <h1 className="text-6xl font-extrabold text-accent-blue">404</h1>
         <h2 className="text-2xl font-semibold text-white">Page introuvable</h2>
-        <p className="max-w-md text-gray-400">Desole, cette page n&apos;existe pas.</p>
+        <p className="max-w-md text-gray-400">Désolé, cette page n&apos;existe pas.</p>
         <Link
           href="/"
           className="inline-block rounded-xl bg-accent-blue px-6 py-3 font-semibold text-white shadow-glow transition-colors hover:bg-[#3d68f0]"

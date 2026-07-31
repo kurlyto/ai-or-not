@@ -45,24 +45,24 @@ export function ParametresModal({ isOpen, onClose }: ParametresModalProps) {
         )}
 
         <div>
-          <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500">Credits</h3>
+          <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500">Crédits</h3>
           <div className="space-y-2 text-xs text-gray-400">
             <p>
-              <span className="text-gray-300">🎨 Peinture :</span> images reelles issues d&apos;un jeu de donnees de
-              tableaux classiques (domaine public) · images IA generees par diffusion.
+              <span className="text-gray-300">🎨 Peinture :</span> images réelles issues d&apos;un jeu de données de
+              tableaux classiques (domaine public) · images IA générées par diffusion.
             </p>
             <p>
-              <span className="text-gray-300">📸 Realiste :</span> photos reelles via Unsplash/Picsum · visages et
-              scenes IA generes par des modeles de type GAN.
+              <span className="text-gray-300">📸 Réaliste :</span> photos réelles via Unsplash · visages et scènes IA
+              générés par des modèles de type GAN.
             </p>
           </div>
         </div>
 
         <div>
-          <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500">A propos</h3>
+          <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500">À propos</h3>
           <p className="text-xs leading-relaxed text-gray-400">
-            AI or Not est un jeu educatif gratuit pour developper son esprit critique face aux images generees par
-            IA. Aucune donnee personnelle n&apos;est collectee, tout reste sur votre appareil.
+            AI or Not est un jeu éducatif gratuit pour développer son esprit critique face aux images générées par
+            IA.
           </p>
         </div>
 
@@ -79,7 +79,7 @@ export function ParametresModal({ isOpen, onClose }: ParametresModalProps) {
                   setConfirmationReset(false)
                 }}
               >
-                Confirmer la reinitialisation
+                Confirmer la réinitialisation
               </Bouton>
               <Bouton variant="ghost" size="sm" onClick={() => setConfirmationReset(false)}>
                 Annuler
@@ -87,7 +87,7 @@ export function ParametresModal({ isOpen, onClose }: ParametresModalProps) {
             </div>
           ) : (
             <Bouton variant="ghost" size="sm" onClick={() => setConfirmationReset(true)}>
-              Reinitialiser mes statistiques
+              Réinitialiser mes statistiques
             </Bouton>
           )}
         </div>

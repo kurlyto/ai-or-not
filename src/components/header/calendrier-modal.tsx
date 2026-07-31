@@ -13,10 +13,10 @@ export function CalendrierModal({ isOpen, onClose, onSelectionnerDate }: Calendr
   const aujourdhui = obtenirDateJeu()
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Parties precedentes">
+    <Modal isOpen={isOpen} onClose={onClose} title="Parties précédentes">
       <div className="space-y-4">
         <p className="text-sm text-gray-400">
-          Rejouez les parties des 7 derniers jours. Les parties passees peuvent etre jouees a volonte.
+          Rejouez les parties des 7 derniers jours. Les parties passées peuvent être jouées à volonté.
         </p>
 
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
@@ -39,7 +39,7 @@ export function CalendrierModal({ isOpen, onClose, onSelectionnerDate }: Calendr
 
         <div className="border-t border-dark-border pt-4">
           <p className="text-xs text-gray-500">
-            Chaque jour propose 2 modes : Realiste et Peinture, avec 5 images chacun.
+            Chaque jour propose 2 modes : Réaliste et Peinture, avec 5 images chacun.
           </p>
         </div>
       </div>

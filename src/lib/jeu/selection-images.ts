@@ -39,8 +39,10 @@ function choisirNAvecSeed<T>(items: T[], n: number, seed: number): T[] {
 }
 
 function calculerRepartition(seedBase: number): { nombreIA: number; nombreReelles: number } {
-  const repartitionRand = creerGenerateur(seedBase)()
-  const nombreIA = repartitionRand < 0.5 ? 2 : 3
+  const rand = creerGenerateur(seedBase)()
+  // Repartition totalement aleatoire : 0 a 5 images IA sur 5 (peut donc
+  // donner une partie 100% reelle ou 100% IA), pas de minimum garanti.
+  const nombreIA = Math.floor(rand * 6)
   return { nombreIA, nombreReelles: 5 - nombreIA }
 }
 

@@ -29,12 +29,18 @@ body {
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(79, 125, 255, 0.12), transparent),
-    var(--dark-primary);
-  background-attachment: fixed;
+  background: var(--dark-primary);
   color: white;
   overflow-x: hidden;
   min-height: 100dvh;
+}
+
+.fond-anime {
+  --mx: 50%;
+  --my: 30%;
+  background: radial-gradient(600px circle at var(--mx) var(--my), rgba(79, 125, 255, 0.14), transparent 60%),
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(79, 125, 255, 0.1), transparent),
+    var(--dark-primary);
 }
 
 /* Empeche le tap-highlight bleu par defaut sur mobile (on gere nos propres etats) */
@@ -80,6 +86,7 @@ a {
 .image-container {
   @apply relative mx-auto aspect-[4/3] w-full max-w-2xl overflow-hidden rounded-2xl shadow-dark-lg;
   background: linear-gradient(135deg, var(--dark-tertiary), var(--dark-secondary));
+  max-height: min(60vh, 60dvh);
 }
 
 @media (max-width: 640px) {

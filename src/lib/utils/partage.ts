@@ -1,46 +1,64 @@
 import { DonneesPartage, ResultatPartie } from '@/types'
 
+// Phrases de défi variées selon le score, pour donner envie de partager
+const DEFIS_PAR_SCORE: Record<number, string[]> = {
+  5: [
+    'Score parfait ! Votre grand-mère fera-t-elle aussi bien ? Défiez-la !',
+    "5/5, sans faute ! Quelqu'un peut-il faire mieux dans votre entourage ?",
+  ],
+  4: [
+    'Votre grand-mère aura-t-elle plus de 4/5 ? Défiez-la !',
+    'Presque parfait ! Qui peut faire mieux que vous ?',
+  ],
+  3: [
+    'Votre grand-mère aura-t-elle plus de 3/5 ? Défiez-la !',
+    "La moyenne, mais l'IA vous a bien eu sur certaines. À vous de faire mieux ?",
+  ],
+  2: [
+    "L'IA vous a bien eu cette fois. Qui saura mieux repérer les pièges ?",
+    "2/5... Votre entourage saura-t-il faire mieux face à l'IA ?",
+  ],
+  1: [
+    "L'IA vous a berné presque à chaque fois ! Vengez-vous, ou trouvez quelqu'un de plus fort.",
+    "1/5, l'IA est passée maître dans l'art de vous tromper. À qui le tour ?",
+  ],
+  0: [
+    "0/5 : l'IA vous a totalement berné ! Quelqu'un fera forcément mieux.",
+    "Match nul face à l'IA (0/5). Qui osera relever le défi ?",
+  ],
+}
+
+function choisirDefi(score: number): string {
+  const options = DEFIS_PAR_SCORE[score] || DEFIS_PAR_SCORE[3]
+  return options[Math.floor(Math.random() * options.length)]
+}
+
 // Fonction pour générer le texte de partage
 export function genererTextePartage(donnees: DonneesPartage): string {
-  const { score, total, mode, date_jeu } = donnees
-  const pourcentage = Math.round((score / total) * 100)
-  
-  // Emojis selon le mode
+  const { score, total, mode } = donnees
   const emoji = mode === 'painting' ? '🎨' : '📸'
-  
-  // Messages selon le score
-  let message = ''
-  if (pourcentage === 100) {
-    message = `Perfect score! I got ${score}/${total} on AI or Not! ${emoji}`
-  } else if (pourcentage >= 80) {
-    message = `Great score! I got ${score}/${total} on AI or Not! ${emoji}`
-  } else if (pourcentage >= 60) {
-    message = `Good score! I got ${score}/${total} on AI or Not! ${emoji}`
-  } else {
-    message = `I scored ${score}/${total} on AI or Not! ${emoji}`
-  }
-  
-  const challenge = 'Can you beat my score?'
-  const hashtag = '#AIorNot #AIDetection'
-  
-  return `${message}\n${challenge}\n\n${hashtag}`
+  const modeTexte = mode === 'painting' ? 'Peinture' : 'Réaliste'
+
+  const resultat = `${emoji} AI or Not (${modeTexte}) : ${score}/${total}`
+  const defi = choisirDefi(score)
+
+  return `${resultat}\n\n${defi}`
 }
 
 // Fonction pour générer le texte de partage avec lien
 export function genererTextePartageAvecLien(donnees: DonneesPartage): string {
   const texteBase = genererTextePartage(donnees)
   const lien = obtenirLienJeu()
-  
-  return `${texteBase}\n\nPlay here: ${lien}`
+
+  return `${texteBase}\n\n${lien}`
 }
 
 // Fonction pour obtenir le lien du jeu
 export function obtenirLienJeu(): string {
-  // En production, remplacer par votre vraie URL
   if (typeof window !== 'undefined') {
     return window.location.origin
   }
-  return 'https://ai-or-not.vercel.app'
+  return 'https://ai-or-not.nathan-knaebel.com'
 }
 
 // Fonction pour copier le texte dans le presse-papiers
@@ -59,7 +77,7 @@ export async function copierDansPressePapiers(texte: string): Promise<boolean> {
       document.body.appendChild(textArea)
       textArea.focus()
       textArea.select()
-      
+
       const reussi = document.execCommand('copy')
       document.body.removeChild(textArea)
       return reussi
@@ -76,9 +94,9 @@ export async function partagerViaWebShare(donnees: DonneesPartage): Promise<bool
     if (navigator.share) {
       const texte = genererTextePartageAvecLien(donnees)
       await navigator.share({
-        title: 'AI or Not - My Score',
+        title: 'AI or Not',
         text: texte,
-        url: obtenirLienJeu()
+        url: obtenirLienJeu(),
       })
       return true
     }
@@ -96,9 +114,9 @@ export function genererLienPartagePersonnalise(donnees: DonneesPartage): string 
     score: donnees.score.toString(),
     total: donnees.total.toString(),
     mode: donnees.mode,
-    date_jeu: donnees.date_jeu
+    date_jeu: donnees.date_jeu,
   })
-  
+
   return `${baseUrl}?share=${btoa(params.toString())}`
 }
 
@@ -110,7 +128,7 @@ export function decoderLienPartage(encodedParams: string): DonneesPartage | null
       score: parseInt(params.get('score') || '0'),
       total: parseInt(params.get('total') || '5'),
       mode: (params.get('mode') as 'realistic' | 'painting') || 'realistic',
-      date_jeu: params.get('date_jeu') || new Date().toISOString().split('T')[0]
+      date_jeu: params.get('date_jeu') || new Date().toISOString().split('T')[0],
     }
   } catch (error) {
     console.error('Erreur lors du décodage du lien:', error)
@@ -128,8 +146,8 @@ export function obtenirOptionsPartage(): {
   return {
     webShare: typeof navigator !== 'undefined' && !!navigator.share,
     clipboard: typeof navigator !== 'undefined' && !!navigator.clipboard,
-    twitter: true, // Toujours disponible via URL
-    facebook: true // Toujours disponible via URL
+    twitter: true,
+    facebook: true,
   }
 }
 
@@ -143,10 +161,10 @@ export function genererUrlsPartageSocial(donnees: DonneesPartage): {
   const lien = obtenirLienJeu()
   const texteEncode = encodeURIComponent(texte)
   const lienEncode = encodeURIComponent(lien)
-  
+
   return {
     twitter: `https://twitter.com/intent/tweet?text=${texteEncode}&url=${lienEncode}`,
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${lienEncode}&quote=${texteEncode}`,
-    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${lienEncode}`
+    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${lienEncode}`,
   }
 }

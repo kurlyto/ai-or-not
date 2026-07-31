@@ -1,13 +1,14 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
+import { FondAnime } from '@/components/ui/fond-anime'
 import '../styles/globals.css'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
-  title: 'AI or Not - Le jeu quotidien de detection IA',
+  title: 'AI or Not - Le jeu quotidien de détection IA',
   description:
-    'Saurez-vous distinguer une image reelle d\'une image generee par IA ? 5 images par jour, 2 modes : Realiste et Peinture.',
+    "Saurez-vous distinguer une image réelle d'une image générée par IA ? 5 images par jour, 2 modes : Réaliste et Peinture.",
   applicationName: 'AI or Not',
   manifest: '/manifest.json',
   icons: {
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'AI or Not',
-    description: "Le jeu quotidien pour tester votre oeil face a l'IA generative.",
+    description: "Le jeu quotidien pour tester votre œil face à l'IA générative.",
     type: 'website',
   },
 }
@@ -35,7 +36,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className={inter.variable}>
-      <body className="font-sans">{children}</body>
+      <body className="font-sans">
+        <FondAnime />
+        <div className="relative z-10">{children}</div>
+      </body>
     </html>
   )
 }

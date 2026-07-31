@@ -27,7 +27,7 @@ export function Header({ onSelectionnerDate }: HeaderProps) {
           <nav className="flex items-center gap-1">
             <button
               onClick={() => setCalendrierOpen(true)}
-              aria-label="Parties precedentes"
+              aria-label="Parties précédentes"
               className="flex min-h-[40px] items-center gap-1.5 rounded-lg px-2.5 py-2 text-sm text-gray-300 transition-colors hover:bg-white/5 hover:text-white sm:px-3"
             >
               <IconeCalendrier />
@@ -36,7 +36,7 @@ export function Header({ onSelectionnerDate }: HeaderProps) {
 
             <button
               onClick={() => setGuideOpen(true)}
-              aria-label="Guide de detection"
+              aria-label="Guide de détection"
               className="flex min-h-[40px] items-center gap-1.5 rounded-lg px-2.5 py-2 text-sm text-gray-300 transition-colors hover:bg-white/5 hover:text-white sm:px-3"
             >
               <IconeQuestion />
@@ -45,7 +45,7 @@ export function Header({ onSelectionnerDate }: HeaderProps) {
 
             <button
               onClick={() => setParametresOpen(true)}
-              aria-label="Parametres"
+              aria-label="Paramètres"
               className="flex min-h-[40px] items-center gap-1.5 rounded-lg px-2.5 py-2 text-sm text-gray-300 transition-colors hover:bg-white/5 hover:text-white sm:px-3"
             >
               <IconeParametres />
