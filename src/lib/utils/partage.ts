@@ -1,32 +1,41 @@
 import { DonneesPartage, ResultatPartie } from '@/types'
 import { encoderPartie } from './lien-partie'
 
-// Phrases de défi variées selon le score, pour donner envie de partager
+// Phrases de défi variées selon le score, pour donner envie de partager.
+// Toujours a la 1ere personne ("mon score"), jamais de reference a un tiers
+// (grand-mere, etc.) qui n'a pas de sens si c'est justement cette personne
+// qui recoit le message.
 const DEFIS_PAR_SCORE: Record<number, string[]> = {
   5: [
-    "Score parfait, 5/5. Tu fais moins bien ? Tu me dois une bière. T'es chaud ?",
+    "Score parfait, 5/5 ! Tu fais moins bien, tu me dois une bière. T'es chaud ?",
     'Sans faute ! Qui ose se mesurer à moi ?',
-    'Score parfait ! Ta grand-mère peut-elle faire mieux ?',
+    "5/5, l'IA n'a rien pu me cacher. À toi de jouer.",
+    'Score parfait. Prouve que tu peux au moins égaler ça.',
   ],
   4: [
     "4/5, presque parfait. T'es capable de faire mieux ?",
-    'Ta grand-mère aura-t-elle plus de 4/5 ? Défie-la !',
+    "Il ne m'en manquait qu'une. Toi, combien ?",
+    "4/5 face à l'IA. Défi accepté ?",
   ],
   3: [
-    "3/5... Tu penses que ta grand-mère peut faire mieux ?",
-    "La moyenne, mais l'IA m'a bien eu sur certaines. À toi de faire mieux ?",
+    "3/5, la moyenne. L'IA m'a bien eu sur certaines. À toi de faire mieux ?",
+    "3/5... Facile de critiquer, plus dur de faire mieux. Essaie voir.",
+    "Pile la moyenne (3/5). Tu peux sûrement me battre.",
   ],
   2: [
     "L'IA m'a bien eu cette fois (2/5). Toi, tu sauras repérer les pièges ?",
-    "2/5... Même ta grand-mère ferait mieux, non ?",
+    "2/5, pas glorieux. Montre-moi que tu fais mieux.",
+    "L'IA m'a piégé sur 3 images sur 5. À ton tour de tenter.",
   ],
   1: [
     "L'IA m'a berné presque à chaque fois (1/5). Venge-moi, ou avoue que tu feras pire.",
     "1/5, l'IA m'a totalement eu. À qui le tour ?",
+    "Seulement 1/5... Difficile de faire pire, non ?",
   ],
   0: [
     "0/5 : l'IA m'a totalement berné ! Quelqu'un peut forcément faire mieux.",
     "Match nul face à l'IA (0/5). Tu oses relever le défi ?",
+    "0 sur 5. L'IA a gagné cette manche. Venge-moi.",
   ],
 }
 
