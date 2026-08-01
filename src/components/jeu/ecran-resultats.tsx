@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import { Bouton } from '@/components/ui/bouton'
 import { ResultatPartie } from '@/types'
+import { LABEL_PAR_MODE } from '@/lib/jeu/labels'
 
 interface EcranResultatsProps {
   resultat: ResultatPartie
@@ -29,9 +30,7 @@ export function EcranResultats({ resultat, onRejouer, onRepartager }: EcranResul
     <div className="mx-auto flex max-w-md flex-col items-center gap-5 py-2">
       <div className="animate-fade-in-up space-y-1 text-center">
         <h2 className="font-heading text-xl font-bold text-white sm:text-2xl">Partie terminée</h2>
-        <p className="text-sm text-gray-400">
-          Mode {resultat.mode === 'painting' ? '🎨 Peinture' : '📸 Réaliste'}
-        </p>
+        <p className="text-sm text-gray-400">Mode {LABEL_PAR_MODE[resultat.mode]}</p>
       </div>
 
       <div className="glass-card animate-pop-in flex flex-col items-center gap-1.5 rounded-3xl px-8 py-5">
@@ -56,17 +55,17 @@ export function EcranResultats({ resultat, onRejouer, onRepartager }: EcranResul
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={image.url} alt={`Image ${index + 1}`} className="h-full w-full object-cover" />
-              <div
-                className={`absolute inset-0 flex items-center justify-center bg-black/20 transition-opacity group-hover:bg-black/40`}
+              <div className="absolute inset-0 bg-black/10 transition-opacity group-hover:bg-black/30" />
+              <span className="absolute left-1 top-1 rounded bg-black/60 px-1 py-0.5 text-[9px] font-bold leading-none text-white">
+                {image.est_ia ? '🤖 IA' : '📷 Réel'}
+              </span>
+              <span
+                className={`absolute bottom-1 right-1 flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold shadow ${
+                  reponse.estCorrecte ? 'bg-accent-green text-white' : 'bg-accent-red text-white'
+                }`}
               >
-                <span
-                  className={`flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold shadow ${
-                    reponse.estCorrecte ? 'bg-accent-green text-white' : 'bg-accent-red text-white'
-                  }`}
-                >
-                  {reponse.estCorrecte ? '✓' : '✕'}
-                </span>
-              </div>
+                {reponse.estCorrecte ? '✓' : '✕'}
+              </span>
             </button>
           )
         })}

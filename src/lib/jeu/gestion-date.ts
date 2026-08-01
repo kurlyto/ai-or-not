@@ -13,8 +13,13 @@ export function obtenirDateJeu(): string {
   return formateur.format(maintenant) // en-CA => YYYY-MM-DD
 }
 
+// Cle de tracking "deja joue aujourd'hui" : un ModeJeu classique, ou 'serie'
+// pour la Serie du jour (suivie independamment de son theme resolu, qui
+// change chaque jour).
+type CleModeJoue = ModeJeu | 'serie'
+
 // Fonction pour vérifier si un mode peut être joué aujourd'hui
-export function peutJouerMode(mode: ModeJeu): boolean {
+export function peutJouerMode(mode: CleModeJoue): boolean {
   const aujourdhui = obtenirDateJeu()
   const donnees = obtenirDonneesPartiesJouees()
 
@@ -23,14 +28,14 @@ export function peutJouerMode(mode: ModeJeu): boolean {
 }
 
 // Fonction pour marquer qu'un mode a été joué
-export function marquerModeJoue(mode: ModeJeu): void {
+export function marquerModeJoue(mode: CleModeJoue): void {
   if (typeof window === 'undefined') return
 
   const aujourdhui = obtenirDateJeu()
   const donnees = obtenirDonneesPartiesJouees()
 
   if (!donnees[aujourdhui]) {
-    donnees[aujourdhui] = { realistic: false, painting: false }
+    donnees[aujourdhui] = {}
   }
 
   donnees[aujourdhui][mode] = true
@@ -38,7 +43,7 @@ export function marquerModeJoue(mode: ModeJeu): void {
 }
 
 // Fonction pour obtenir les données des parties jouées
-export function obtenirDonneesPartiesJouees(): Record<string, { realistic: boolean, painting: boolean }> {
+export function obtenirDonneesPartiesJouees(): Record<string, Partial<Record<CleModeJoue, boolean>>> {
   if (typeof window === 'undefined') return {}
 
   try {

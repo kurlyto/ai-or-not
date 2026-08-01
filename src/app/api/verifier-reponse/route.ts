@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, error: 'Réponse invalide' }, { status: 400 })
     }
 
-    if (!mode || !['realistic', 'painting'].includes(mode)) {
+    if (!mode || !['realistic', 'painting', 'portrait', 'nature', 'architecture'].includes(mode)) {
       return NextResponse.json({ success: false, error: 'Mode invalide' }, { status: 400 })
     }
 

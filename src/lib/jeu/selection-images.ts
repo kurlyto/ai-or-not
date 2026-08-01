@@ -2,6 +2,12 @@ import { Image, ModeJeu } from '@/types'
 import { lireManifest } from '@/lib/data/manifest'
 import { obtenirPhotosDuJour } from '@/lib/unsplash/cache-quotidien'
 
+// Modes dont les images "reelles" viennent d'Unsplash plutot que d'un
+// manifest local (celui-ci ne contient alors qu'un pool "ai"). 'realistic'
+// est generaliste (pas de query), les themes de la Serie du jour sont
+// filtres par sujet (voir cache-quotidien.ts).
+const MODES_UNSPLASH: ModeJeu[] = ['realistic', 'portrait', 'nature', 'architecture']
+
 // PRNG deterministe (mulberry32) : meme seed => meme suite de nombres,
 // necessaire pour que tous les joueurs aient la meme partie un jour donne.
 function creerGenerateur(seed: number) {
@@ -48,8 +54,9 @@ function calculerRepartition(seedBase: number): { nombreIA: number; nombreReelle
 
 // Genere les 5 images d'une partie de facon deterministe pour (date, mode).
 // - painting : images IA + reelles depuis le manifest statique local
-// - realistic : images IA depuis le manifest local, images reelles depuis
-//   l'API Unsplash (cachees par jour, voir cache-quotidien.ts)
+// - realistic / portrait / nature / architecture : images IA depuis le
+//   manifest local, images reelles depuis l'API Unsplash (cachees par jour
+//   et par mode, voir cache-quotidien.ts)
 export async function genererPartieDuJour(date: string, mode: ModeJeu): Promise<Image[]> {
   const manifest = lireManifest(mode)
   const seedBase = hashSeed(`${date}:${mode}`)
@@ -65,11 +72,11 @@ export async function genererPartieDuJour(date: string, mode: ModeJeu): Promise<
 
   let imagesReelles: Image[]
 
-  if (mode === 'realistic') {
-    const photos = await obtenirPhotosDuJour(date)
+  if (MODES_UNSPLASH.includes(mode)) {
+    const photos = await obtenirPhotosDuJour(date, mode)
     const photosChoisies = choisirNAvecSeed(photos, nombreReelles, seedBase + 2)
     imagesReelles = photosChoisies.map((photo) => ({
-      id: `realistic-unsplash-${photo.id}`,
+      id: `${mode}-unsplash-${photo.id}`,
       url: photo.url,
       categorie: mode,
       est_ia: false,
@@ -77,7 +84,7 @@ export async function genererPartieDuJour(date: string, mode: ModeJeu): Promise<
       attributionUnsplash: photo.attribution,
     }))
   } else {
-    imagesReelles = choisirNAvecSeed(manifest.real, nombreReelles, seedBase + 2).map((entry) => ({
+    imagesReelles = choisirNAvecSeed(manifest.real ?? [], nombreReelles, seedBase + 2).map((entry) => ({
       id: `${mode}-real-${entry.file}`,
       url: `/images/${mode}/real/${entry.file}`,
       categorie: mode,

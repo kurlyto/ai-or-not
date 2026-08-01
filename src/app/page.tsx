@@ -36,6 +36,10 @@ export default function HomePage() {
   const [dateSelectionnee, setDateSelectionnee] = useState<string | null>(null)
   const [feedback, setFeedback] = useState<FeedbackReponse | null>(null)
   const [popoverPartageVisible, setPopoverPartageVisible] = useState(false)
+  // Mode reellement demande par le joueur ('serie' ou un ModeJeu direct) :
+  // distinct du mode resolu stocke dans la partie, necessaire pour marquer
+  // "Serie du jour" comme jouee independamment du theme du jour resolu.
+  const [modeDemandeActuel, setModeDemandeActuel] = useState<ModeJeu | 'serie' | null>(null)
 
   // Si l'URL contient ?partie=..., on charge exactement cette partie (memes
   // 5 images que celle partagee), plutot que de generer la partie du jour.
@@ -56,13 +60,13 @@ export default function HomePage() {
     window.history.replaceState({}, '', window.location.pathname)
   }, [])
 
-  const demarrerJeu = async (mode: ModeJeu) => {
+  const demarrerJeu = async (modeDemande: ModeJeu | 'serie') => {
     setIsLoading(true)
     setError(null)
 
     try {
       const url = new URL('/api/jeu', window.location.origin)
-      url.searchParams.set('mode', mode)
+      url.searchParams.set('mode', modeDemande)
       if (dateSelectionnee) {
         url.searchParams.set('date', dateSelectionnee)
       }
@@ -76,13 +80,17 @@ export default function HomePage() {
 
       const images = data.data.images
       const dateJeu: string = data.data.date_jeu
+      // Le serveur resout 'serie' vers le vrai theme du jour (portrait,
+      // nature, architecture...) : c'est ce mode resolu qu'on doit stocker.
+      const modeResolu: ModeJeu = data.data.mode
 
       if (images.length !== 5) {
         throw new Error(`Nombre d'images incorrect: ${images.length} au lieu de 5`)
       }
 
-      const nouvellePartie = creerNouvellePartie(mode, images, dateJeu)
+      const nouvellePartie = creerNouvellePartie(modeResolu, images, dateJeu)
       setPartie(nouvellePartie)
+      setModeDemandeActuel(modeDemande)
       setFeedback(null)
       setEtatJeu('en_cours')
     } catch (err) {
@@ -144,8 +152,8 @@ export default function HomePage() {
           const resultat = calculerResultat(partieMiseAJour)
           sauvegarderDernierePartie(resultat)
           mettreAJourStatistiques(resultat)
-          if (!dateSelectionnee && !partie.estPartiePartagee) {
-            marquerModeJoue(partie.mode)
+          if (!dateSelectionnee && !partie.estPartiePartagee && modeDemandeActuel) {
+            marquerModeJoue(modeDemandeActuel)
           }
           setEtatJeu('resultats')
           setPopoverPartageVisible(true)
@@ -175,6 +183,7 @@ export default function HomePage() {
     setFeedback(null)
     setDateSelectionnee(null)
     setPopoverPartageVisible(false)
+    setModeDemandeActuel(null)
   }
 
   const obtenirResultatActuel = (): ResultatPartie | null => {

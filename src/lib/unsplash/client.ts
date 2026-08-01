@@ -34,13 +34,15 @@ function versPhotoUnsplash(brut: PhotoUnsplashBrut): PhotoUnsplash {
   }
 }
 
-// Recupere N photos aleatoires reelles depuis Unsplash. A appeler rarement
-// (rate limit 50 req/h en mode Demo) : le resultat doit etre mis en cache
-// cote serveur, jamais rappele a chaque visite.
-export async function obtenirPhotosAleatoires(nombre: number): Promise<PhotoUnsplash[]> {
+// Recupere N photos aleatoires reelles depuis Unsplash, optionnellement
+// filtrees par theme (query). A appeler rarement (rate limit 50 req/h en
+// mode Demo) : le resultat doit etre mis en cache cote serveur, jamais
+// rappele a chaque visite.
+export async function obtenirPhotosAleatoires(nombre: number, query?: string): Promise<PhotoUnsplash[]> {
   const url = new URL(`${UNSPLASH_API_BASE}/photos/random`)
   url.searchParams.set('count', String(nombre))
   url.searchParams.set('content_filter', 'high')
+  if (query) url.searchParams.set('query', query)
 
   const reponse = await fetch(url.toString(), {
     headers: { Authorization: `Client-ID ${cleAcces()}` },

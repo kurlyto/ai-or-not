@@ -55,6 +55,10 @@ export function ParametresModal({ isOpen, onClose }: ParametresModalProps) {
               <span className="text-gray-300">📸 Réaliste :</span> photos réelles via Unsplash · visages et scènes IA
               générés par des modèles de type GAN.
             </p>
+            <p>
+              <span className="text-gray-300">🧑🏞️🏛️ Série du jour :</span> photos réelles via Unsplash (filtrées par
+              thème) · images IA générées par des modèles de type GAN, spécifiques à chaque thème.
+            </p>
           </div>
         </div>
 

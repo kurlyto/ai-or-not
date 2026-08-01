@@ -1,6 +1,11 @@
 // Types principaux pour l'application AI or Not
 
-export type ModeJeu = 'realistic' | 'painting'
+// Modes "historiques" (dataset propre a chacun) + themes de la Serie du jour
+// (contenu Unsplash filtre par query + pool IA dedie). Un theme est un
+// ModeJeu comme un autre pour toute la chaine de selection/verification :
+// seule la provenance du contenu differe.
+export type ModeJeu = 'realistic' | 'painting' | 'portrait' | 'nature' | 'architecture'
+export type ThemeSerieDuJour = 'portrait' | 'nature' | 'architecture'
 export type ReponseUtilisateur = 'ai' | 'not_ai'
 
 export interface AttributionUnsplash {
@@ -67,6 +72,8 @@ export interface ManifestEntry {
 }
 
 export interface Manifest {
-  real: ManifestEntry[]
+  // Optionnel : les themes de la Serie du jour n'ont pas de pool "real"
+  // local, leurs photos reelles viennent uniquement d'Unsplash.
+  real?: ManifestEntry[]
   ai: ManifestEntry[]
 }

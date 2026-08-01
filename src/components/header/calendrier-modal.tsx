@@ -39,7 +39,7 @@ export function CalendrierModal({ isOpen, onClose, onSelectionnerDate }: Calendr
 
         <div className="border-t border-dark-border pt-4">
           <p className="text-xs text-gray-500">
-            Chaque jour propose 2 modes : Réaliste et Peinture, avec 5 images chacun.
+            Chaque jour propose Réaliste, Peinture et une Série du jour à thème, avec 5 images chacun.
           </p>
         </div>
       </div>

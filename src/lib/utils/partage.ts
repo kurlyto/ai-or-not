@@ -1,5 +1,6 @@
 import { DonneesPartage, ResultatPartie } from '@/types'
 import { encoderPartie } from './lien-partie'
+import { LABEL_PAR_MODE } from '@/lib/jeu/labels'
 
 // Phrases de défi variées selon le score, pour donner envie de partager.
 // Toujours a la 1ere personne ("mon score"), jamais de reference a un tiers
@@ -47,7 +48,7 @@ function choisirDefi(score: number): string {
 // Fonction pour générer le texte de partage
 export function genererTextePartage(donnees: DonneesPartage): string {
   const { score, mode } = donnees
-  const emoji = mode === 'painting' ? '🎨' : '📸'
+  const emoji = LABEL_PAR_MODE[mode].split(' ')[0]
 
   const defi = choisirDefi(score)
 

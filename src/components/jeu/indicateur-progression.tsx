@@ -1,5 +1,6 @@
 import React from 'react'
 import { PartieEnCours } from '@/types'
+import { LABEL_PAR_MODE } from '@/lib/jeu/labels'
 
 interface IndicateurProgressionProps {
   partie: PartieEnCours
@@ -40,9 +41,7 @@ export function IndicateurProgression({ partie }: IndicateurProgressionProps) {
           {numeroActuel}/{total}
         </span>
         <span className="hidden sm:inline text-dark-border">•</span>
-        <span className="hidden sm:inline">
-          {partie.mode === 'painting' ? '🎨 Peinture' : '📸 Réaliste'}
-        </span>
+        <span className="hidden sm:inline">{LABEL_PAR_MODE[partie.mode]}</span>
         <span className="rounded-full bg-dark-tertiary px-2.5 py-1 font-medium text-white">
           {score} pt{score > 1 ? 's' : ''}
         </span>

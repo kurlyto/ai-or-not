@@ -1,8 +1,8 @@
-import { PartieEnCours, Image, Reponse, ResultatPartie, ReponseUtilisateur } from '@/types'
+import { PartieEnCours, Image, Reponse, ResultatPartie, ReponseUtilisateur, ModeJeu } from '@/types'
 
 // Fonction pour créer une nouvelle partie
 export function creerNouvellePartie(
-  mode: 'realistic' | 'painting',
+  mode: ModeJeu,
   images: Image[],
   dateJeu: string,
   estPartiePartagee = false

@@ -2,10 +2,11 @@
 
 import React, { useEffect, useState } from 'react'
 import { ModeJeu } from '@/types'
-import { peutJouerMode, formaterDateAffichage } from '@/lib/jeu/gestion-date'
+import { peutJouerMode, formaterDateAffichage, obtenirDateJeu } from '@/lib/jeu/gestion-date'
+import { obtenirThemeDuJour, nomAffichageTheme, emojiTheme } from '@/lib/jeu/serie-du-jour'
 
 interface EcranDemarrageProps {
-  onDemarrerJeu: (mode: ModeJeu) => void
+  onDemarrerJeu: (mode: ModeJeu | 'serie') => void
   isLoading?: boolean
   dateSelectionnee?: string | null
 }
@@ -35,23 +36,34 @@ const MODES: CarteMode[] = [
 export function EcranDemarrage({ onDemarrerJeu, isLoading = false, dateSelectionnee }: EcranDemarrageProps) {
   // La disponibilité dépend du localStorage, donc calculée uniquement côté client
   // pour éviter un mismatch d'hydratation SSR/CSR.
-  const [disponibilite, setDisponibilite] = useState<Record<ModeJeu, boolean>>({
+  const [disponibilite, setDisponibilite] = useState<Record<ModeJeu | 'serie', boolean>>({
     realistic: true,
     painting: true,
+    portrait: true,
+    nature: true,
+    architecture: true,
+    serie: true,
   })
+
+  const dateDuJeu = dateSelectionnee || obtenirDateJeu()
+  const themeDuJour = obtenirThemeDuJour(dateDuJeu)
 
   useEffect(() => {
     if (dateSelectionnee) {
-      setDisponibilite({ realistic: true, painting: true })
+      setDisponibilite({ realistic: true, painting: true, portrait: true, nature: true, architecture: true, serie: true })
       return
     }
     setDisponibilite({
       realistic: peutJouerMode('realistic'),
       painting: peutJouerMode('painting'),
+      portrait: true,
+      nature: true,
+      architecture: true,
+      serie: peutJouerMode('serie'),
     })
   }, [dateSelectionnee])
 
-  const aucunModeJouable = !dateSelectionnee && !disponibilite.realistic && !disponibilite.painting
+  const aucunModeJouable = !dateSelectionnee && !disponibilite.realistic && !disponibilite.painting && !disponibilite.serie
 
   return (
     <div className="mx-auto flex max-w-xl flex-col items-center gap-6 py-4 lg:max-w-4xl lg:gap-14">
@@ -96,6 +108,30 @@ export function EcranDemarrage({ onDemarrerJeu, isLoading = false, dateSelection
             </button>
           )
         })}
+
+        <button
+          onClick={() => onDemarrerJeu('serie')}
+          disabled={!disponibilite.serie || isLoading}
+          className="group relative col-span-2 flex min-h-[84px] items-center justify-center gap-3 overflow-hidden rounded-2xl border border-accent-yellow/30 bg-gradient-to-r from-accent-yellow/15 via-transparent to-accent-yellow/15 bg-dark-secondary p-5 transition-all duration-200 hover:border-accent-yellow/50 hover:-translate-y-0.5 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0 lg:min-h-[140px] lg:gap-5 lg:rounded-[2rem] lg:p-8"
+        >
+          <span className="text-3xl transition-transform duration-200 group-hover:scale-110 lg:text-6xl" aria-hidden>
+            {emojiTheme(themeDuJour)}
+          </span>
+          <div className="text-left">
+            <p className="font-button text-lg font-bold text-white lg:text-3xl">Série du jour</p>
+            <p className="text-sm text-accent-yellow lg:text-lg">Aujourd&apos;hui : {nomAffichageTheme(themeDuJour)}</p>
+          </div>
+          {!disponibilite.serie && (
+            <span className="absolute right-2 top-2 rounded-full bg-black/40 px-2 py-0.5 text-[11px] font-medium text-gray-300 lg:right-5 lg:top-5 lg:px-3.5 lg:py-1.5 lg:text-base">
+              Déjà joué
+            </span>
+          )}
+          {isLoading && (
+            <div className="absolute inset-0 flex items-center justify-center bg-dark-secondary/70">
+              <div className="h-6 w-6 animate-spin rounded-full border-2 border-white border-t-transparent lg:h-10 lg:w-10" />
+            </div>
+          )}
+        </button>
       </div>
 
       <div className="animate-fade-in-up -mt-3 space-y-1 text-center lg:-mt-8 lg:space-y-2" style={{ animationDelay: '140ms' }}>
@@ -104,7 +140,7 @@ export function EcranDemarrage({ onDemarrerJeu, isLoading = false, dateSelection
         </p>
         {aucunModeJouable && (
           <p className="text-sm font-medium text-accent-yellow lg:text-xl">
-            Vous avez déjà joué les deux modes aujourd&apos;hui. Revenez demain !
+            Vous avez déjà joué tous les modes aujourd&apos;hui. Revenez demain !
           </p>
         )}
       </div>
