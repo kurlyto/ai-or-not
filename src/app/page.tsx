@@ -192,7 +192,7 @@ export default function HomePage() {
   }
 
   return (
-    <main className="flex h-dvh flex-col overflow-hidden bg-dark-primary text-white">
+    <main className="flex h-dvh flex-col overflow-y-auto bg-dark-primary text-white">
       <Header onSelectionnerDate={handleDateSelection} />
 
       <div className="container mx-auto flex min-h-0 flex-1 flex-col justify-center px-4 py-3">
