@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import Script from 'next/script'
 import { Chakra_Petch, Manrope, Sora } from 'next/font/google'
 import { FondAnime } from '@/components/ui/fond-anime'
 import '../styles/globals.css'
@@ -41,6 +42,14 @@ export default function RootLayout({
       <body className="font-sans">
         <FondAnime />
         <div className="relative z-10">{children}</div>
+        {/* Umami (self-hosted). data-domains limite la collecte au domaine de
+            prod : le dev en localhost ne pollue pas les stats. */}
+        <Script
+          strategy="afterInteractive"
+          src="https://analytics.mondevisdentaire.fr/script.js"
+          data-website-id="6d0c31c9-83bf-4079-9bc0-373a79441a81"
+          data-domains="ai-or-not.nathan-knaebel.com"
+        />
       </body>
     </html>
   )
