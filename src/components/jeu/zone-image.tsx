@@ -58,18 +58,6 @@ export function ZoneImage({ image, feedback }: ZoneImageProps) {
         />
       )}
 
-      {image.attributionUnsplash && (
-        <a
-          href={image.attributionUnsplash.photoUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => e.stopPropagation()}
-          className="absolute bottom-2 right-2 rounded-full bg-black/40 px-2 py-1 text-[10px] text-gray-300 opacity-70 backdrop-blur-sm transition-opacity hover:opacity-100 hover:text-white"
-        >
-          📷 {image.attributionUnsplash.photographeNom} / Unsplash
-        </a>
-      )}
-
       {feedback && (
         <div
           className={`absolute inset-0 flex flex-col items-center justify-end gap-2 pb-4 animate-fade-in ${
